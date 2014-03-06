@@ -181,6 +181,8 @@ module.exports = function (grunt) {
                     cwd: '<%= yeoman.app %>',
                     dest: '<%= yeoman.dist %>',
                     src: [
+                        'bower_components/**',
+                        'scripts/**',
                         '*.{ico,txt}',
                         '.htaccess',
                         'elements/**',
@@ -194,6 +196,12 @@ module.exports = function (grunt) {
             all: {
                 rjsConfig: '<%= yeoman.app %>/scripts/main.js'
             }
+        },
+        'gh-pages': {
+          options: {
+            base: 'dist'
+          },
+          src: '**/*'
         }
     });
 
@@ -243,5 +251,11 @@ module.exports = function (grunt) {
         'jshint',
         // 'test'
         'build'
+    ]);
+
+    grunt.loadNpmTasks('grunt-gh-pages');
+    grunt.registerTask('deploy', [
+      'build',
+      'gh-pages'
     ]);
 };
