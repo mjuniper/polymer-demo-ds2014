@@ -10,10 +10,16 @@
         
         <title>polymer demo ds2014</title>
 
+        <!-- jsapi -->
+        <link rel="stylesheet" href="http://js.arcgis.com/3.8/js/esri/css/esri.css">
+        <script src="http://js.arcgis.com/3.8/"></script>
+
         <link rel="stylesheet" href="styles/main.css">
 
         <!-- Place your HTML imports here -->
         <script src="bower_components/platform/platform.js"></script>
+        <link rel="import" href="bower_components/polymer/polymer.html">
+        <link rel="import" href="elements/jupe-map.html">
         <!-- <link rel="import" href="elements/list.html">
         <link rel="import" href="elements/greeting.html"> -->
     </head>
@@ -31,15 +37,15 @@
           <div class="tip"></div>
         </div>
         
-        <div id="map"></div>
+        <jupe-map extent="-2332499, -1530060, 2252197, 1856904" wkid="102003"></jupe-map>
         
         <div id="title" class="shadow info">Current Gas Prices by State</div>
         
 
       <script>
-        document.addEventListener('WebComponentsReady', function() {
-            // Perform some behaviour
-        });
+        // document.addEventListener('WebComponentsReady', function() {
+        //     // Perform some behaviour
+        // });
       </script>
     </body>
 </html>

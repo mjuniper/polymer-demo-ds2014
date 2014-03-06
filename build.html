@@ -10,15 +10,80 @@
         
         <title>polymer demo ds2014</title>
 
+        <!-- jsapi -->
+        <link rel="stylesheet" href="http://js.arcgis.com/3.8/js/esri/css/esri.css">
+        <script src="http://js.arcgis.com/3.8/"></script>
+
         <link rel="stylesheet" href="styles/main.css">
 
         <!-- Place your HTML imports here -->
         <script src="../app/bower_components/platform/platform.js"></script>
 
+        
+        
         <!-- <link rel="import" href="elements/list.html">
         <link rel="import" href="elements/greeting.html"> -->
     </head>
-    <body>
+    <body><polymer-element name="polymer-body" extends="body" assetpath="../app/bower_components/polymer/">
+
+  <script>
+
+  // upgrade polymer-body last so that it can contain other imported elements
+  document.addEventListener('polymer-ready', function() {
+    
+    Polymer('polymer-body', Platform.mixin({
+
+      created: function() {
+        this.template = document.createElement('template');
+        var body = wrap(document).body;
+        var c$ = body.childNodes.array();
+        for (var i=0, c; (c=c$[i]); i++) {
+          if (c.localName !== 'script') {
+            this.template.content.appendChild(c);
+          }
+        }
+        // snarf up user defined model
+        window.model = this;
+      },
+
+      parseDeclaration: function(elementElement) {
+        this.lightFromTemplate(this.template);
+      }
+
+    }, window.model));
+
+  });
+
+  </script>
+
+</polymer-element>
+<!--
+ Copyright 2013 The Polymer Authors. All rights reserved.
+ Use of this source code is governed by a BSD-style
+ license that can be found in the LICENSE file.
+-->
+<script src="../app/bower_components/polymer/polymer.js"></script>
+<!-- <link rel="import" href="../polymer-dev/polymer.html"> -->
+
+
+<polymer-element name="jupe-map" attributes="webMapId, basemap, extent, wkId" assetpath="../app/elements/">
+  <template>
+    <style>
+        /*host refers to the custom element itself and has the lowest specificity; thus allowing users to override your styling from the outside*/
+        #map {
+          display: block; /* Note: by default elements are always display:inline. */
+          padding: 0;
+          margin: 0;
+          height: 100%;
+          width: 100%;
+        }
+      </style>
+
+      <div id="map"></div>
+  </template>
+
+  <script src="../app/elements/scripts/jupe-map.js"></script>
+</polymer-element>
         <!--[if lt IE 10]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -32,15 +97,15 @@
           <div class="tip"></div>
         </div>
         
-        <div id="map"></div>
+        <jupe-map extent="-2332499, -1530060, 2252197, 1856904" wkid="102003"></jupe-map>
         
         <div id="title" class="shadow info">Current Gas Prices by State</div>
         
 
       <script>
-        document.addEventListener('WebComponentsReady', function() {
-            // Perform some behaviour
-        });
+        // document.addEventListener('WebComponentsReady', function() {
+        //     // Perform some behaviour
+        // });
       </script>
     </body>
 </html>
