@@ -1,0 +1,19 @@
+
+<polymer-element name="jupe-map" attributes="webMapId, basemap, extent, wkId">
+  <template>
+    <style>
+        /*host refers to the custom element itself and has the lowest specificity; thus allowing users to override your styling from the outside*/
+        #map {
+          display: block; /* Note: by default elements are always display:inline. */
+          padding: 0;
+          margin: 0;
+          height: 100%;
+          width: 100%;
+        }
+      </style>
+
+      <div id="map"></div>
+  </template>
+
+  <script src="scripts/jupe-map.js"></script>
+</polymer-element>
