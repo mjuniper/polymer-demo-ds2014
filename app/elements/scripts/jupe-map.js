@@ -66,7 +66,6 @@ Polymer('jupe-map', {
 
     // create a class breaks renderer
     var breaks = this.calcBreaks(gasMin, gasMax, 4);
-    // console.log('gas price breaks: ', breaks);
     var SFS = esri.symbol.SimpleFillSymbol;
     var SLS = esri.symbol.SimpleLineSymbol;
     var outline = SLS('solid', new dojo.Color('#444'), 1);
@@ -97,7 +96,6 @@ Polymer('jupe-map', {
     for ( var i = 0; i < numberOfClasses; i++ ) {
       breakValues.push(this.formatDollars(min + ( range * i )));
     }
-    // console.log('break values: ', breakValues);
     return breakValues;
   },
 
