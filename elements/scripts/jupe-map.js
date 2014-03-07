@@ -39,14 +39,6 @@ Polymer('jupe-map', {
       me.updateEndHandler = me.fl.on('update-end', me.onUpdateEnd.bind(me));
 
       me.map.addLayer(me.fl);
-
-
-
-      // //raise events to outside world
-      // me.map.on('extent-change', function (e) { me.fire('extent-change', e); });
-      // me.map.on('layer-add', function (e) { me.fire('layer-added', e); });
-      window.Woot = {};
-      window.Woot.map = me;
     });
   },
 

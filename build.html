@@ -225,6 +225,9 @@ license that can be found in the LICENSE file.
       <!-- <polymer-jsonp id="jsonpEl" url="http://apify.heroku.com/api/gasprices.json?callback="
     response="{{gasPricesJson}}"></polymer-jsonp> -->
       <jupe-gas-prices id="gasPrices" url="http://apify.heroku.com/api/gasprices.json?callback=" response="{{gasPricesJson}}"></jupe-gas-prices>
+      <div id="legend" class="shadow info">
+        <div class="tip"></div>
+      </div>
       <div id="map"></div>
   </template>
 
@@ -241,11 +244,9 @@ license that can be found in the LICENSE file.
         <img src="http://dl.dropbox.com/u/2654618/loading_gray_circle.gif">
       </div>
 
-      <div id="legend" class="shadow info">
-        <div class="tip"></div>
-      </div>
 
       <jupe-map extent="-2332499, -1530060, 2252197, 1856904" wkid="102003"></jupe-map>
+      
       
       <div id="title" class="shadow info">Current Gas Prices by State</div>
         
