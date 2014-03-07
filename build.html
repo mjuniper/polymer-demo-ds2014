@@ -269,7 +269,7 @@ license that can be found in the LICENSE file.
 
 
 
-<polymer-element name="jupe-map" attributes="webMapId, basemap, extent, wkId" assetpath="../app/elements/">
+<polymer-element name="jupe-map" attributes="basemap, extent, wkId" assetpath="../app/elements/">
   <template>
     <style>
         /*host refers to the custom element itself and has the lowest specificity; thus allowing users to override your styling from the outside*/
@@ -286,7 +286,7 @@ license that can be found in the LICENSE file.
           width: 100%;
         }
       </style>
-      <jupe-gas-prices id="gasPrices" url="http://apify.heroku.com/api/gasprices.json?callback=" "=""></jupe-gas-prices>
+      <jupe-gas-prices id="gasPrices" url="http://apify.heroku.com/api/gasprices.json?callback="></jupe-gas-prices>
       <jupe-legend id="legend"></jupe-legend>
       <div id="map"></div>
   </template>

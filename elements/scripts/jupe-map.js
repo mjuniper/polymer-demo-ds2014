@@ -3,7 +3,6 @@
 Polymer('jupe-map', {
 
   basemap: null,
-  webMapId: '',
   extent: '-130,25,-65,50',
   wkId: 4326,
   map: null,
