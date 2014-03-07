@@ -1,0 +1,59 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="jupe-legend"  attributes="">
+  <template>
+    <style>
+      /* styles for the custom element itself - lowest specificity */
+      :host { 
+        display: block;
+        bottom: 15px;
+        height: 11.5em;
+        left: 15px;
+        position: absolute !important;
+        width: 12em;
+        background: #fff;
+        font-family: Helvetica, Arial, sans-serif;
+        -moz-box-shadow: 0 0 5px #888;
+        -webkit-box-shadow: 0 0 5px #888;
+        box-shadow: 0 0 5px #888;
+        padding: 5px;
+        z-index: 40; 
+      }
+      .legend {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+    <div class="legend">
+      <div class="tip">
+        <strong hidden?="{{hide}}">{{state}}: ${{price}}</strong>
+      </div>
+    </div>
+  </template>
+  <script>
+    Polymer('jupe-legend', {
+
+      init: function (map, layer) {
+        this.legend = new esri.dijit.Legend({
+          map: map,
+          layerInfos: [{ 'layer': layer, 'title': 'Regular Gas' }]
+        }, this.shadowRoot.querySelector('.legend'));
+        this.legend.startup();
+
+        layer.on('mouse-over', this.showTip.bind(this));
+        layer.on('mouse-out', this.hideTip.bind(this));
+      },
+
+      showTip: function (e) {
+        this.hide = false;
+        this.state = e.graphic.attributes.STATE_NAME;
+        this.price = e.graphic.attributes.GAS_DISPLAY;
+      },
+
+      hideTip: function () {
+        this.hide = true;
+      }
+
+    });
+  </script>
+</polymer-element>

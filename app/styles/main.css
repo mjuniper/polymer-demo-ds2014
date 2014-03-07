@@ -29,15 +29,6 @@ body {
   padding: 5px;
   z-index: 40; 
 }
-#map{ 
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: 0; 
-  padding: 0; 
-}
 #title {
   font-size: 2em;
   left: 50%;
@@ -47,12 +38,11 @@ body {
   /*top: 15px;*/
   width: 16em;
 }
-#legend {
-  bottom: 15px;
-  height: 11.5em;
-  left: 15px;
-  position: absolute !important;
-  width: 12em;
+#title img {
+  height: 30px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
 }
 .tip {
   height: 1em;

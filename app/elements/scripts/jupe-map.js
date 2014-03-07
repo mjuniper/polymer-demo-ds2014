@@ -10,8 +10,8 @@ Polymer('jupe-map', {
 
   ready: function() {
     var me = this;
-    require(['esri/map', 'esri/arcgis/utils', 'esri/geometry/Extent', 'esri/renderers/SimpleRenderer', 'esri/layers/FeatureLayer', 'esri/layers/GraphicsLayer', 'esri/tasks/GeometryService', 'esri/tasks/BufferParameters', 'esri/symbols/SimpleLineSymbol','esri/symbols/SimpleFillSymbol', 'esri/symbols/SimpleMarkerSymbol', 'dojo/_base/Color', 'esri/graphic', 'dojo/domReady!'], 
-      function(Map, arcgisUtils, Extent, SimpleRenderer, FeatureLayer, GraphicsLayer, GeometryService, BufferParameters, SimpleLineSymbol, SimpleFillSymbol, SimpleMarkerSymbol, Color, Graphic) {
+    require(['esri/map', 'esri/geometry/Extent', 'esri/renderers/SimpleRenderer', 'esri/layers/FeatureLayer', 'esri/symbols/SimpleLineSymbol','esri/symbols/SimpleFillSymbol', 'dojo/_base/Color', 'esri/dijit/Legend'], 
+      function(Map, Extent, SimpleRenderer, FeatureLayer, SimpleLineSymbol, SimpleFillSymbol, Color, Legend) {
       //gather map parameters from element attributes
       var mapOptions = {
         basemap: me.basemap
@@ -25,28 +25,20 @@ Polymer('jupe-map', {
       //create the map! - me.$ is a dom selector scoped to this element
       me.map = new Map(me.$.map, mapOptions);
 
-      me.fl = new esri.layers.FeatureLayer('http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer/3', {
+      me.fl = new FeatureLayer('http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer/3', {
         maxAllowableOffset: me.map.extent.getWidth() / me.map.width,
-        mode: esri.layers.FeatureLayer.MODE_SNAPSHOT,
+        mode: FeatureLayer.MODE_SNAPSHOT,
         outFields: ['STATE_NAME'],
         visible: true
       });
 
       // override default renderer so that states aren't drawn
       // until the gas price data has been loaded and is joined
-      me.fl.setRenderer(new esri.renderer.SimpleRenderer(null));
+      me.fl.setRenderer(new SimpleRenderer(null));
 
       me.updateEndHandler = me.fl.on('update-end', me.onUpdateEnd.bind(me));
 
       me.map.addLayer(me.fl);
-
-
-
-      // //raise events to outside world
-      // me.map.on('extent-change', function (e) { me.fire('extent-change', e); });
-      // me.map.on('layer-add', function (e) { me.fire('layer-added', e); });
-      window.Woot = {};
-      window.Woot.map = me;
     });
   },
 
@@ -68,7 +60,7 @@ Polymer('jupe-map', {
     // on mouse over below the legend
     var displayValue;
     _.each(this.fl.graphics, function(g) {
-      displayValue = this.findGasPrice(g);
+      displayValue = this.$.gasPrices.findGasPrice(g.attributes.STATE_NAME);
       g.attributes.GAS_DISPLAY = displayValue;
     }, this);
 
@@ -78,7 +70,7 @@ Polymer('jupe-map', {
     var SFS = esri.symbol.SimpleFillSymbol;
     var SLS = esri.symbol.SimpleLineSymbol;
     var outline = SLS('solid', new dojo.Color('#444'), 1);
-    var br = new esri.renderer.ClassBreaksRenderer(null, 'GAS_DISPLAY');
+    var br = new esri.renderer.ClassBreaksRenderer(null, this.findGasPrice);
     br.setMaxInclusive(true);
     br.addBreak(breaks[0], breaks[1], new SFS('solid', outline, new dojo.Color([255, 255, 178, 0.75])));
     br.addBreak(breaks[1], breaks[2], new SFS('solid', outline, new dojo.Color([254, 204, 92, 0.75])));
@@ -89,13 +81,14 @@ Polymer('jupe-map', {
     this.fl.redraw();
 
     // this.legend = new backboneDemoDs2014.LegendView({ map: this.map, fl: this.fl });
+    this.$.legend.init(this.map, this.fl);
 
-    // // remove the loading div
-    //document.querySelector('#loading').remove();
+    //remove the loading div
+    document.querySelector('#loading').remove();
   },
 
   findGasPrice: function (graphic) {
-    return this.$.gasPrices.findGasPrice(graphic.attributes.STATE_NAME);
+    return graphic.attributes.GAS_DISPLAY;
   },
 
   calcBreaks: function (min, max, numberOfClasses) {
