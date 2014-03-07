@@ -1,8 +1,10 @@
+<link rel="import" href="jupe-gas-prices.html">
 
 <polymer-element name="jupe-map" attributes="webMapId, basemap, extent, wkId">
   <template>
     <style>
         /*host refers to the custom element itself and has the lowest specificity; thus allowing users to override your styling from the outside*/
+        :host { display: block; }
         #map {
           display: block; /* Note: by default elements are always display:inline. */
           padding: 0;
@@ -11,9 +13,13 @@
           width: 100%;
         }
       </style>
-
+      <!-- <polymer-jsonp id="jsonpEl" url="http://apify.heroku.com/api/gasprices.json?callback="
+    response="{{gasPricesJson}}"></polymer-jsonp> -->
+      <jupe-gas-prices id="gasPrices" url="http://apify.heroku.com/api/gasprices.json?callback="
+    response="{{gasPricesJson}}"></jupe-gas-prices>
       <div id="map"></div>
   </template>
 
   <script src="scripts/jupe-map.js"></script>
 </polymer-element>
+

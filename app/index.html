@@ -12,6 +12,12 @@
 
         <!-- jsapi -->
         <link rel="stylesheet" href="http://js.arcgis.com/3.8/js/esri/css/esri.css">
+
+        <script>
+          var dojoConfig = { 
+            useDeferredInstrumentation:true
+          };
+        </script>
         <script src="http://js.arcgis.com/3.8/"></script>
 
         <!-- build:css styles/main.css -->
@@ -21,29 +27,30 @@
         <!-- Place your HTML imports here -->
         <script src="bower_components/platform/platform.js"></script>
         <link rel="import" href="bower_components/polymer/polymer.html">
+        <!-- <link rel="import"
+      href="bower_components/polymer-jsonp/polymer-jsonp.html"> -->
+        <!-- <link rel="import" href="elements/jupe-gas-prices.html"> -->
         <link rel="import" href="elements/jupe-map.html">
-        <!-- <link rel="import" href="elements/list.html">
-        <link rel="import" href="elements/greeting.html"> -->
     </head>
     <body>
-        <!--[if lt IE 10]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        
-        <div id="loading" class="shadow loading">
-          Getting Latest Gas Price Data...
-          <img src="http://dl.dropbox.com/u/2654618/loading_gray_circle.gif">
-        </div>
+      <!--[if lt IE 10]>
+          <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <![endif]-->
+      
+      <div id="loading" class="shadow loading">
+        Getting Latest Gas Price Data...
+        <img src="http://dl.dropbox.com/u/2654618/loading_gray_circle.gif">
+      </div>
 
-        <div id="legend" class="shadow info">
-          <div class="tip"></div>
-        </div>
-        
-        <jupe-map extent="-2332499, -1530060, 2252197, 1856904" wkId="102003"></jupe-map>
-        
-        <div id="title" class="shadow info">Current Gas Prices by State</div>
-        
+      <div id="legend" class="shadow info">
+        <div class="tip"></div>
+      </div>
 
+      <jupe-map extent="-2332499, -1530060, 2252197, 1856904" wkId="102003"></jupe-map>
+      
+      <div id="title" class="shadow info">Current Gas Prices by State</div>
+        
+      <script src="bower_components/underscore/underscore.js"></script>
       <script>
         // document.addEventListener('WebComponentsReady', function() {
         //     // Perform some behaviour
