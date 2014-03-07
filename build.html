@@ -13,6 +13,8 @@
         <!-- jsapi -->
         <link rel="stylesheet" href="http://js.arcgis.com/3.8/js/esri/css/esri.css">
 
+        <link rel="stylesheet" href="styles/main.css">
+
         <script>
           var dojoConfig = { 
             useDeferredInstrumentation:true
@@ -20,15 +22,11 @@
         </script>
         <script src="http://js.arcgis.com/3.8/"></script>
 
-        <link rel="stylesheet" href="styles/main.css">
-
         <!-- Place your HTML imports here -->
         <script src="../app/bower_components/platform/platform.js"></script>
 
         
-        <!-- <link rel="import"
-      href="bower_components/polymer-jsonp/polymer-jsonp.html"> -->
-        <!-- <link rel="import" href="elements/jupe-gas-prices.html"> -->
+        
         
     </head>
     <body><polymer-element name="polymer-body" extends="body" assetpath="../app/bower_components/polymer/">
@@ -288,8 +286,6 @@ license that can be found in the LICENSE file.
           width: 100%;
         }
       </style>
-      <!-- <polymer-jsonp id="jsonpEl" url="http://apify.heroku.com/api/gasprices.json?callback="
-    response="{{gasPricesJson}}"></polymer-jsonp> -->
       <jupe-gas-prices id="gasPrices" url="http://apify.heroku.com/api/gasprices.json?callback=" response="{{gasPricesJson}}"></jupe-gas-prices>
       <jupe-legend id="legend"></jupe-legend>
       <div id="map"></div>
@@ -315,10 +311,5 @@ license that can be found in the LICENSE file.
       <div id="title" class="shadow info">Current Gas Prices by State<img src="../app/images/p_logo.png"></div>
         
       <script src="../app/bower_components/underscore/underscore.js"></script>
-      <script>
-        // document.addEventListener('WebComponentsReady', function() {
-        //     // Perform some behaviour
-        // });
-      </script>
     </body>
 </html>
