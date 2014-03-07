@@ -1,0 +1,39 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer-jsonp/polymer-jsonp.html">
+<polymer-element name="jupe-gas-prices" extends="polymer-jsonp">
+  <script>
+    Polymer('jupe-gas-prices', {
+      
+      gasPrices: [],
+
+      getDisplayValue: function (item) {
+        var regular = item.regular;
+        return parseFloat(parseFloat(regular.replace('$', '')).toFixed(2));
+      },
+      
+      getMin: function () {
+        var found = _.min(this.gasPrices, function (item) { return this.getDisplayValue(item); }, this);
+        return this.getDisplayValue(found);
+      },
+
+      getMax: function () {
+        var found = _.max(this.gasPrices, function (item) { return this.getDisplayValue(item); }, this);
+        return this.getDisplayValue(found);
+      },
+
+      findGasPrice: function (stateName) {
+        var found = _.findWhere(this.gasPrices, { state: stateName });
+        return this.getDisplayValue(found);
+      },
+
+      ready: function(){
+        var me = this;
+        this.addEventListener('polymer-response', function () {
+          me.gasPrices = JSON.parse(me.response);
+          me.fire('got-prices');
+        });
+      }
+
+    });
+  </script>
+</polymer-element>
