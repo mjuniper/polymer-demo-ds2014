@@ -10,3 +10,4 @@ Resources:
 * http://www.polymer-project.org/
 * http://customelements.io/
 * http://www.html5rocks.com/en/tutorials/webcomponents/customelements/
+* http://updates.html5rocks.com/2014/01/Chrome-Dev-Summit-Polymer-declarative-encapsulated-reusable-components
